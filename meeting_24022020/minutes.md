@@ -1,0 +1,35 @@
+I discussed the basics of our HMM implementation. 
+For reference, here are the published papers on this work:
+
+Method:
+https://doi.org/10.1098/rsta.2018.0150
+
+First applications:
+https://doi.org/10.1002/adts.201800168
+
+Our goal is to reduce the number of quaderature points (QP) that require a molecular dynamcis simulation.
+
+Each QP is characterised by its strain matrix (6 unique elements) and this matrix's history, which we currently approximate with a 10 point spline of the history of each element.
+In this way, each QP is characterised by 60 values.
+
+The difference betweeen two quaderature points is the absolute difference between every element of a QP's strain history, this is basically the L2 norm. Maxime is this correct?
+
+<img src="https://render.githubusercontent.com/render/math?math=\rm{Difference} = | \epsilon_{.,.,t}^i - \epsilon_{.,.,t}^j |">
+
+Where <img src="https://render.githubusercontent.com/render/math?math=\epsilon_{.,.,t}^i"> , is every element of the strain history for QP i. 
+
+Our current approach is to find QPs whose similarity is below a threshold value, call this value gamma.
+Then run MD sims for QPs chosen based on a graph importance algorithm, which I explained during the meeting.
+
+We should calculate an error for how well the chosen subset of QPs represents all QPs. 
+It would therefore be better to optimise for this error, call it d. d = error in clustering + cpu penalty.
+We could cluster QPs using a K-means algorithm, each cluster we choose to simulate the QP closest to the centroid for that cluster.
+Discussed a Kt-means algorithm which can choose a variable number of clusters to generate. 
+The number of clusters could be increased to reduce the clustering error, so we add a penalty based on the computational cost of doing more MD simulations.
+
+We can then formalise the overall error in our MD reduction strategy by using importance sampling. 
+We can estimate the difference between simulating the entire set of QPs and a sub set of QPs. 
+Benjamin could you cadd something here, maybe some reading I can do to understand this better.
+
+We also talked about Voronoi partitions, and adaptive meshing in FEM. 
+I think these are similar techniques for importance sampling, and definitely something we want to include further down the line.
