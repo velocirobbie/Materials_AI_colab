@@ -1,6 +1,6 @@
 These tarballs contain the data written by 120 processes (out of 319) during an HMM simulation of a tension test on a cuboid sample. 
 
-The processes deal with a subset of the quadrature points of the complete finite element mesh of the system. In turn, each of these 12O CSV files contain the mechanical state (strain and stress tensors) at each timestep for the quadrature points they are in charge of.
+The processes deal with a subset of the quadrature points of the complete finite element mesh of the system. In turn, each of these 120 CSV files contain the mechanical state (strain and stress tensors) at each timestep for the quadrature points they are in charge of.
 
 The tar.gz archives can be decompressed in a single directory executing:
 ```
