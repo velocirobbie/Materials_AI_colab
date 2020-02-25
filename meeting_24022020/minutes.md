@@ -17,8 +17,9 @@ The difference between two quadrature points is the absolute difference between 
 
 Where <img src="https://render.githubusercontent.com/render/math?math=\epsilon_{.,.,t}^i"> , is every element of the strain history for QP i. 
 
-Our current approach is to find QPs whose similarity is below a threshold value, call this value gamma.
-Then run MD sims for QPs chosen based on a graph importance algorithm, which I explained during the meeting.
+Our current approach is to find QPs whose similarity is below a threshold value, call it **Gamma**. This threshold is currently set such as to find a comprise between walltime and *global accuracy* reduction. *Global accuracy* is assessed in comparison to a reference simulation without the use of the spline-based reduction algorithm. The choice of the threshold **Gamma** might not hold from one simulation configuration to another, therefore, quite annoyingly, its value should theoretically be verified for every new testing campaign. Hence, requiring to compute the whole system at least once without the spline-based algorithm.
+
+MD sims for QPs to be ran are chosen based on a graph importance algorithm, which I explained during the meeting. In more details, a graph is setup to ensure we obtain the stress tensor for all QPs computing the **least** MD simulations. The design of the graph is not so trivial, it attributes importance to QPs proportionally to the number of other QPs it is similar too.
 
 We should calculate an error for how well the chosen subset of QPs represents all QPs. 
 It would therefore be better to optimise for this error, call it d. d = error in clustering + cpu penalty.
