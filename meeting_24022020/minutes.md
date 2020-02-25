@@ -9,10 +9,9 @@ https://doi.org/10.1002/adts.201800168
 
 Our goal is to reduce the number of quaderature points (QP) that require a molecular dynamcis simulation.
 
-Each QP is characterised by its strain matrix (6 unique elements) and this matrix's history, which we currently approximate with a 10 point spline of the history of each element.
-In this way, each QP is characterised by 60 values.
+Each QP is characterised by its strain matrix (6 unique elements) and this matrix's history, which we currently approximate with a 10 point spline of the history of each element. In this way, each QP is characterised by 60 values. What we refer here as the "history of the strain matrix" can be seen as a trajectory within which each position is defined by 6 scalars.
 
-The difference betweeen two quaderature points is the absolute difference between every element of a QP's strain history, this is basically the L2 norm. Maxime is this correct?
+The difference between two quadrature points is the absolute difference between every element of a QP's strain history, this is basically the L2 norm. In other words, we compute the L2-norm of the difference between the splines fitted to the two strain histories (square root of the sum of the differences between the 10 pairs of control points of the splines).
 
 <img src="https://render.githubusercontent.com/render/math?math=\rm{Difference} = | \epsilon_{.,.,t}^i - \epsilon_{.,.,t}^j |">
 
