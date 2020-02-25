@@ -22,8 +22,10 @@ Our current approach is to find QPs whose similarity is below a threshold value,
 MD sims for QPs to be ran are chosen based on a graph importance algorithm, which I explained during the meeting. In more details, a graph is setup to ensure we obtain the stress tensor for all QPs computing the **least** MD simulations. The design of the graph is not so trivial, it attributes importance to QPs proportionally to the number of other QPs it is similar too.
 
 We should calculate an error for how well the chosen subset of QPs represents all QPs. 
-It would therefore be better to optimise for this error, call it d. d = error in clustering + cpu penalty.
-We could cluster QPs using a K-means algorithm, each cluster we choose to **simulate the QP closest to the centroid** for that cluster.
+This is the sum of difference between each QP and the QP representing it.
+This error could be trivially minimized by adding more representative QPs (and increaseing computational cost), 
+so instead we optimise a new term, call it d, where d = error in clustering + cpu penalty.
+We could cluster QPs using a K-means algorithm, for each cluster we choose to **simulate the QP closest to the centroid** for that cluster.
 Discussed a Kt-means algorithm which can choose a variable number of clusters to generate. 
 The number of clusters could be increased to reduce the clustering error, so we add a penalty based on the computational cost of doing more MD simulations.
 
