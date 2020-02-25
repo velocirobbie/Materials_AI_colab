@@ -23,13 +23,13 @@ MD sims for QPs to be ran are chosen based on a graph importance algorithm, whic
 
 We should calculate an error for how well the chosen subset of QPs represents all QPs. 
 It would therefore be better to optimise for this error, call it d. d = error in clustering + cpu penalty.
-We could cluster QPs using a K-means algorithm, each cluster we choose to simulate the QP closest to the centroid for that cluster.
+We could cluster QPs using a K-means algorithm, each cluster we choose to **simulate the QP closest to the centroid** for that cluster.
 Discussed a Kt-means algorithm which can choose a variable number of clusters to generate. 
 The number of clusters could be increased to reduce the clustering error, so we add a penalty based on the computational cost of doing more MD simulations.
 
 We can then formalise the overall error in our MD reduction strategy by using importance sampling. 
 We can estimate the difference between simulating the entire set of QPs and a sub set of QPs. 
-Benjamin could you cadd something here, maybe some reading I can do to understand this better.
+Benjamin could you add something here, maybe some reading I can do to understand this better.
 
 We also talked about Voronoi partitions, and adaptive meshing in FEM. 
 I think these are similar techniques for importance sampling, and definitely something we want to include further down the line.
